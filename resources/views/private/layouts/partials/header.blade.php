@@ -20,6 +20,42 @@
             </div>
         @endif
 
+        @if (request()->route()->getName() == 'lessons.index')
+            <div class="navbar-nav align-items-center">
+                <form action="" method="get" class="w-100">
+                    <div class="nav-item d-flex align-items-center">
+                        <i class="bx bx-search fs-4 lh-0"></i>
+                        <input type="text" name="recherche_lessons_admin" class="form-control border-0 shadow-none"
+                            placeholder="Rechercher une lesson..." aria-label="Rechercher une lesson..." />
+                    </div>
+                </form>
+            </div>
+        @endif
+
+        @if (request()->route()->getName() == 'selection-lesson')
+        <div class="navbar-nav align-items-center">
+            <form action="" method="get" class="w-100">
+                <div class="nav-item d-flex align-items-center">
+                    <i class="bx bx-search fs-4 lh-0"></i>
+                    <input type="text" name="recherche_lessons_user" class="form-control border-0 shadow-none"
+                        placeholder="Rechercher une lesson..." aria-label="Rechercher une lesson..." />
+                </div>
+            </form>
+        </div>
+    @endif
+
+    @if (request()->route()->getName() == 'mes-lessons')
+        <div class="navbar-nav align-items-center">
+            <form action="" method="get" class="w-100">
+                <div class="nav-item d-flex align-items-center">
+                    <i class="bx bx-search fs-4 lh-0"></i>
+                    <input type="text" name="recherche_lessons_user_apprentissage" class="form-control border-0 shadow-none"
+                        placeholder="Rechercher une lesson..." aria-label="Rechercher une lesson..." />
+                </div>
+            </form>
+        </div>
+    @endif
+
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
 

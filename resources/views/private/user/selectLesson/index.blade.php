@@ -14,7 +14,7 @@
                 </div> --}}
                 <form method="POST" action="{{ route('selection-lesson-action') }}">
                     @csrf
-                <div class="row">
+                <div class="row p-3">
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
@@ -52,6 +52,8 @@
             </form>
             </div>
         </div>
+        {{ $lessons->links('pagination::bootstrap-4') }}
+
     </div>
 
 @endsection

@@ -8,16 +8,25 @@ use Illuminate\Http\Request;
 
 class SelectLessonController extends Controller
 {
-    public function index()
-    {
-       // Récupérer l'utilisateur actuel
-        $user = auth()->user(); // Si vous utilisez l'authentification Laravel
-
-        // Récupérer les leçons qui ne sont pas attachées à l'utilisateur
-        $lessons = Lesson::whereDoesntHave('users', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->get();
-        return view('private.user.selectLesson.index', compact('lessons'));
+        public function index(Request $request)
+        {
+            // Récupérer l'utilisateur actuel
+            $user = auth()->user(); // Si vous utilisez l'authentification Laravel
+        
+            $lessons = Lesson::query();
+        
+            // Récupérer les leçons qui ne sont pas attachées à l'utilisateur
+            $lessons->whereDoesntHave('users', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            });
+        
+            if ($recherche = $request->recherche_lessons_user) {
+                $lessons->where('nom', 'like', '%' . $recherche . '%');
+            }
+        
+            $lessons = $lessons->orderBy('created_at', 'asc')->paginate(2, ['*'], 'pageLesson');
+        
+            return view('private.user.selectLesson.index', compact('lessons'));
     }
 
 public function selectionAction(Request $request)

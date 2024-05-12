@@ -8,14 +8,18 @@ use Illuminate\Http\Request;
 
 class MesLessonController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Récupérer l'utilisateur actuel
         $user = auth()->user(); // Si vous utilisez l'authentification Laravel
-
-        // Récupérer les leçons attachées à l'utilisateur
-        $lessons_en_attentes = $user->lessons()->get();
-
+    
+        $lessons_en_attentes = $user->lessons();
+    
+        if ($recherche = $request->recherche_lessons_user_apprentissage) {
+            $lessons_en_attentes->where('nom', 'like', '%' . $recherche . '%');
+        }
+    
+        $lessons_en_attentes = $lessons_en_attentes->paginate(2); // Paginate avec 5 éléments par page    
         return view('private.user.mesLessons.index', compact('lessons_en_attentes'));
     }
 

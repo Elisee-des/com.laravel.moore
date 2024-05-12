@@ -69,6 +69,8 @@
                             </tbody>
                           </table>
                         </div>
+                        {{ $lessons->links('pagination::bootstrap-4') }}
+
                       </div>
                 </div>
             </div>

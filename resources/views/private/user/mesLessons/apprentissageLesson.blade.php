@@ -3,8 +3,8 @@
 @section('titre', "Apprentissage de la $lesson->nom ")
 
 @section('contenu')
-
-    <h2>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">    <h2>
         Apprentissage de la {{ $lesson->nom }}
     </h2>
     
@@ -64,6 +64,8 @@
         </div>
     </div>
     @endforeach
+</div>
+</div>
 @endsection
 
     {{-- @section('scripts')

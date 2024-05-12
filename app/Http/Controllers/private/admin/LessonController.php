@@ -15,11 +15,21 @@ class LessonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lessons = Lesson::orderBy('created_at', 'asc')->get();
+        $lessons = Lesson::query();
+        
+        // Appliquer la recherche si un terme de recherche est présent
+        if ($recherche = $request->recherche_lessons_admin) {
+            $lessons->where('nom', 'like', '%' . $recherche . '%');
+        }
+        
+        // Paginer les résultats
+        $lessons = $lessons->orderBy('created_at', 'asc')->paginate(5, ['*'], 'pageLesson');
+        
         return view('private.admin.lesson.index', compact('lessons'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

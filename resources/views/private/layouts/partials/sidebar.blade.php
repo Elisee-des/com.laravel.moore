@@ -69,25 +69,25 @@
     @if(auth()->user()->role === 'admin')
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item active">
+      <li class="menu-item {{ request()->routeIs('admin.tableauBord') ? 'active' : '' }}">
         <a href="{{ route('admin.tableauBord') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Tableau de bord</div>
         </a>
       </li>
-      <li class="menu-item ">
+      <li class="menu-item {{ request()->routeIs('lessons.index') ? 'active' : '' }}">
         <a href="{{ route('lessons.index') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-right-indent"></i>
           <div data-i18n="Analytics">Gestion des lessons</div>
         </a>
       </li>
-      <li class="menu-item ">
+      <li class="menu-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
         <a href="{{ route('users.index') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bxs-user-detail"></i>
           <div data-i18n="Analytics">Listes des utilisateurs</div>
         </a>
       </li>
-      <li class="menu-item ">
+      <li class="menu-item {{ request()->routeIs('private.admin.profil') ? 'active' : '' }}">
         <a href="{{ route('private.admin.profil') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bxs-cog"></i>
           <div data-i18n="Analytics">Mon profil</div>
@@ -99,19 +99,19 @@
     @if(auth()->user()->role === 'user')
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item active">
-        <a href="{{ url('tableau') }}" class="menu-link">
+      <li class="menu-item {{ request()->routeIs('user.tableauBord') ? 'active' : '' }}">
+        <a href="{{ route('user.tableauBord') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Tableau de bord</div>
         </a>
       </li>
-      <li class="menu-item ">
+      <li class="menu-item {{ request()->routeIs('selection-lesson') ? 'active' : '' }}">
         <a href="{{ route('selection-lesson') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-list-plus"></i>
           <div data-i18n="Analytics">Selectionner des lessons</div>
         </a>
       </li>
-      <li class="menu-item ">
+      <li class="menu-item {{ request()->routeIs('mes-lessons') ? 'active' : '' }}">
         <a href="{{ route('mes-lessons') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-list-ul"></i>
           <div data-i18n="Analytics">Mes lessons</div>
@@ -129,7 +129,7 @@
           <div data-i18n="Analytics">Messages</div>
         </a>
       </li>
-      <li class="menu-item ">
+      <li class="menu-item {{ request()->routeIs('private.admin.profil') ? 'active' : '' }}">
         <a href="{{ route('private.admin.profil') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bxs-cog"></i>
           <div data-i18n="Analytics">Mon profil</div>

@@ -104,6 +104,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            {{ $lessons_en_attentes->links('pagination::bootstrap-4') }}
                             </div>
                             <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
                                 <div class="table-responsive text-nowrap">
