@@ -130,7 +130,7 @@
         </a>
       </li>
       <li class="menu-item ">
-        <a href="index.html" class="menu-link">
+        <a href="{{ route('private.admin.profil') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bxs-cog"></i>
           <div data-i18n="Analytics">Mon profil</div>
         </a>

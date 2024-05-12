@@ -26,8 +26,15 @@ Route::post('/deconnexion', [AuthController::class, 'deconnexion'])->name('decon
 #End Auth Controller
 
 ################################ Private parts #################################
-#Admin routes
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
+
+    Route::put('/users/{id}/edit/password', [UserController::class, "updatePassword"])->name('users.updatePassword');
+    Route::put('/users/{id}/edit/email', [UserController::class, "updateEmail"])->name('users.updateEmail');
+    Route::post('/users/edit/profil', [UserController::class, "updateProfil"])->name('users.updateProfil');
+    Route::put('/users/edit/image', [UserController::class, "updateImage"])->name('users.updateImage');
+    
+    #Admin routes
+    Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin-tableau-de-bord', [TableauBordController::class, "index"])->name("admin.tableauBord");
     Route::get('/ajout-mot-moore/{idLesson}', [LessonController::class, "ajoutMotMoore"])->name("ajout-mot-moore");
     Route::post('/ajout-mot-moore/{idLesson}/action', [LessonController::class, "ajoutMotMooreAction"])->name("ajout-mot-moore-action");
@@ -36,15 +43,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/delete-mot-moore/{idMotMoore}/action', [LessonController::class, "deletetMotMooreAction"])->name("delete-mot-moore-action");
     Route::resource('lessons', LessonController::class);
     Route::resource('users', UserController::class);
-});
+    });
 
-
-#Public routes
-Route::middleware(['auth', 'role:user'])->group(function () {
+    #User routes
+    Route::middleware(['role:user'])->group(function () {
     Route::get('/user-tableau-de-bord', [UserTableauBordController::class, "index"])->name("user.tableauBord");
     Route::get('/selectionner-des-lessons', [SelectLessonController::class, "index"])->name("selection-lesson");
     Route::post('/selectionner-des-lessons/action', [SelectLessonController::class, "selectionAction"])->name("selection-lesson-action");
     Route::get('/mes-lessons', [MesLessonController::class, "index"])->name("mes-lessons");
     Route::get('/deselectionner-des-lessons/action/{idLesson}', [MesLessonController::class, "deselectionAction"])->name("deselection-lesson-action");
     Route::get('/apprentissage-index/{idLesson}', [MesLessonController::class, "apprentissageLesson"])->name("apprentissage-index");
+    });
+
 });
